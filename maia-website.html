@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAIA - AI-Powered Content Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Archivo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --fluo-pink: #FF10F0;
+            --orange: #FF5C00;
+            --gray: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Archivo', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4rem;
+            background: var(--white);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--fluo-pink);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding-top: 100px;
+            background: var(--black);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1400px;
+            padding: 0 4rem;
+        }
+
+        .hero h1 {
+            font-family: 'Archivo', sans-serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            line-height: 0.9;
+            color: var(--white);
+            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 .highlight {
+            color: var(--fluo-pink);
+            display: block;
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            color: var(--white);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--fluo-pink);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            border: 2px solid var(--fluo-pink);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--fluo-pink);
+            transform: translateY(-2px);
+        }
+
+        /* Background Animation */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .hero-bg div {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hero-bg div:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: var(--fluo-pink);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .hero-bg div:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: var(--orange);
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        .hero-bg div:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            background: var(--fluo-pink);
+            top: 60%;
+            left: 70%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 50px) scale(0.9); }
+            75% { transform: translate(30px, 30px) scale(1.05); }
+        }
+
+        /* Problem/Solution Section */
+        .section {
+            padding: 8rem 4rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .column h2 {
+            font-family: 'Archivo', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .column p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-section {
+            background: var(--gray);
+        }
+
+        .problem-section h2 {
+            color: var(--black);
+        }
+
+        .solution-section {
+            background: var(--fluo-pink);
+        }
+
+        .solution-section h2,
+        .solution-section p {
+            color: var(--white);
+        }
+
+        /* Process Section */
+        .process-section {
+            background: var(--white);
+            padding: 8rem 4rem;
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .process-header h2 {
+            font-family: 'Archivo', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .process-header .subtitle {
+            font-size: 1.4rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border: 2px solid var(--black);
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+            border-color: var(--orange);
+            box-shadow: 10px 10px 0 var(--orange);
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+
+        .process-step h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .process-step p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Case Studies Section */
+        .cases-section {
+            background: var(--black);
+            padding: 8rem 4rem;
+        }
+
+        .cases-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .cases-header h2 {
+            font-family: 'Archivo', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .cases-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            gap: 4rem;
+        }
+
+        .case-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .case-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(10px);
+        }
+
+        .case-item:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .case-item:nth-child(even) .case-image {
+            order: 2;
+        }
+
+        .case-content h3 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--fluo-pink);
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .case-content .case-type {
+            font-size: 1rem;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .case-image {
+            background: var(--gray);
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-image::before {
+            content: 'VIEW PROJECT';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--white);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .case-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--fluo-pink);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .case-item:hover .case-image::before,
+        .case-item:hover .case-image::after {
+            opacity: 0.9;
+        }
+
+        .case-placeholder {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ddd;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--white);
+            padding: 8rem 4rem;
+        }
+
+        .contact-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content h2 {
+            font-family: 'Archivo', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-content h2 .highlight {
+            color: var(--fluo-pink);
+        }
+
+        .contact-content p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .contact-options {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .contact-btn {
+            padding: 1.5rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            border: 2px solid var(--black);
+        }
+
+        .contact-btn.primary {
+            background: var(--orange);
+            color: var(--white);
+            border-color: var(--orange);
+        }
+
+        .contact-btn.primary:hover {
+            background: transparent;
+            color: var(--orange);
+        }
+
+        .contact-btn.secondary {
+            background: transparent;
+            color: var(--black);
+        }
+
+        .contact-btn.secondary:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 3rem 4rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .footer-logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 4rem 2rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .case-item {
+                grid-template-columns: 1fr !important;
+                padding: 2rem;
+            }
+
+            .case-item:nth-child(even) .case-image {
+                order: 1;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-options {
+                flex-direction: column;
+            }
+
+            .contact-btn {
+                width: 100%;
+            }
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">MAIA</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#cases">Cases</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="hero-content">
+            <h1>
+                WHERE CREATIVITY
+                <span class="highlight">MEETS AI</span>
+            </h1>
+            <p>Human creative direction. AI-powered execution. The content machine you've been waiting for.</p>
+            <a href="#contact" class="cta-button">Let's Work Together</a>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section problem-section" id="about">
+        <div class="two-column">
+            <div class="column reveal">
+                <h2>Too many tools.<br>Not enough taste.</h2>
+                <p>AI promised speed but delivered complexity. More platforms, more subscriptions, more confusion.</p>
+                <p>The tools are there. The vision isn't.</p>
+            </div>
+            <div class="column reveal">
+                <h2>We are a content machine.<br>Not a tool.</h2>
+                <p>We combine human creative direction with AI-powered execution to deliver ready-to-use content.</p>
+                <p>Same creative process as an agency. No production costs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="section solution-section">
+        <div class="two-column">
+            <div class="column reveal">
+                <h2>Same output.<br>Different cost structure.</h2>
+                <p>High-quality creative content without the traditional agency overhead.</p>
+            </div>
+            <div class="column reveal">
+                <h2>Fast.<br>Flexible.<br>Forward.</h2>
+                <p>From concept to delivery in days, not months. Adapt quickly to market changes and opportunities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section" id="process">
+        <div class="process-header reveal">
+            <h2>THE PROCESS</h2>
+            <p class="subtitle">Same creative process as an agency. No production costs.</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-step reveal">
+                <div class="step-number">01</div>
+                <h3>Brief & Mood</h3>
+                <p>We start with understanding your vision, goals, and aesthetic direction.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="step-number">02</div>
+                <h3>Creative Direction</h3>
+                <p>Our team develops the creative concept and strategic approach.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="step-number">03</div>
+                <h3>AI Production</h3>
+                <p>We leverage AI tools to execute the vision with precision and speed.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="step-number">04</div>
+                <h3>Ready-to-Use Content</h3>
+                <p>Receive polished, production-ready assets ready for deployment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="cases-section" id="cases">
+        <div class="cases-header reveal">
+            <h2>SELECTED WORK</h2>
+        </div>
+        <div class="cases-grid">
+            <div class="case-item reveal">
+                <div class="case-content">
+                    <div class="case-type">Fragrance Launch</div>
+                    <h3>Case 01</h3>
+                    <p>Complete visual identity for a luxury fragrance launch, from product photography to campaign assets.</p>
+                </div>
+                <div class="case-image">
+                    <div class="case-placeholder">01</div>
+                </div>
+            </div>
+
+            <div class="case-item reveal">
+                <div class="case-content">
+                    <div class="case-type">Fashion Campaign</div>
+                    <h3>Case 02</h3>
+                    <p>Editorial-style fashion content for seasonal collection launch and social media strategy.</p>
+                </div>
+                <div class="case-image">
+                    <div class="case-placeholder">02</div>
+                </div>
+            </div>
+
+            <div class="case-item reveal">
+                <div class="case-content">
+                    <div class="case-type">Design / Jewelry</div>
+                    <h3>Case 03</h3>
+                    <p>Product visualization and lifestyle content for fine jewelry brand positioning.</p>
+                </div>
+                <div class="case-image">
+                    <div class="case-placeholder">03</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-content reveal">
+            <h2>Ready to <span class="highlight">create</span>?</h2>
+            <p>Let's discuss how we can bring your vision to life with the perfect blend of human creativity and AI efficiency.</p>
+            <div class="contact-options">
+                <a href="https://calendly.com/your-link" class="contact-btn primary">Schedule a First Call</a>
+                <a href="mailto:hello@maia.agency" class="contact-btn secondary">Contact via Email</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">MAIA</div>
+        <p>&copy; 2025 MAIA Agency. Where creativity meets AI.</p>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        
+        function reveal() {
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial check
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
